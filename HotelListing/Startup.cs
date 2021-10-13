@@ -16,6 +16,7 @@ using System.Threading.Tasks;
 using HotelListing.Configurations;
 using HotelListing.Repository;
 using HotelListing.IRepository;
+using HotelListing.Services;
 
 namespace HotelListing
 {
@@ -32,6 +33,10 @@ namespace HotelListing
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<DatabaseContext>(options => options.UseSqlServer(Configuration.GetConnectionString("sqlConnection")));
+            
+            services.AddAuthentication();
+            services.ConfigureIdentity();
+            services.ConfigureJWT(Configuration);
 
             services.AddCors(o =>
             {
@@ -39,7 +44,9 @@ namespace HotelListing
             });
 
             services.AddAutoMapper(typeof(MapperInitializer));
+
             services.AddTransient<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<IAuthManager, AuthManager>();
 
             services.AddSwaggerGen(c =>
             {
@@ -64,7 +71,7 @@ namespace HotelListing
             app.UseCors("CorsPolicy");
 
             app.UseRouting();
-
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
