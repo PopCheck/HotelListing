@@ -1,11 +1,7 @@
-﻿using AutoMapper;
+﻿using HotelListing.Core.Models;
 using HotelListing.Data;
-using HotelListing.IRepository;
-using HotelListing.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace HotelListing.Controllers

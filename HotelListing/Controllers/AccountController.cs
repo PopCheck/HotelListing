@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
+using HotelListing.Core.DTOs;
+using HotelListing.Core.Services;
 using HotelListing.Data;
-using HotelListing.Models;
-using HotelListing.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -41,7 +41,7 @@ namespace HotelListing.Controllers
         {
             _logger.LogInformation($"Registration attempt for {userDTO.Email}");
 
-            if(!ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
@@ -52,7 +52,7 @@ namespace HotelListing.Controllers
                 user.UserName = userDTO.Email;
                 var result = await _userManager.CreateAsync(user, userDTO.Password);
 
-                if(!result.Succeeded)
+                if (!result.Succeeded)
                 {
                     foreach (var error in result.Errors)
                     {
@@ -85,7 +85,7 @@ namespace HotelListing.Controllers
 
             try
             {
-                if(!await _authManager.ValidateUser(loginDTO))
+                if (!await _authManager.ValidateUser(loginDTO))
                 {
                     return Unauthorized();
                 }

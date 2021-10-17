@@ -1,23 +1,18 @@
+using AspNetCoreRateLimit;
+using HotelListing.Core;
+using HotelListing.Core.Configurations;
+using HotelListing.Core.IRepository;
+using HotelListing.Core.Repository;
+using HotelListing.Core.Services;
 using HotelListing.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using HotelListing.Configurations;
-using HotelListing.Repository;
-using HotelListing.IRepository;
-using HotelListing.Services;
-using AspNetCoreRateLimit;
 
 namespace HotelListing
 {
@@ -49,7 +44,7 @@ namespace HotelListing
                 o.AddPolicy("CorsPolicy", builder => builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
             });
 
-            services.AddAutoMapper(typeof(MapperInitializer));
+            services.ConfigureAutoMapper();
 
             services.AddTransient<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IAuthManager, AuthManager>();
