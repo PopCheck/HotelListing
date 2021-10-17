@@ -7,11 +7,11 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace HotelListing.Migrations
+namespace HotelListing.Data.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20211011154435_AddedIdentity")]
-    partial class AddedIdentity
+    [Migration("20211017152005_FreshDesign")]
+    partial class FreshDesign
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -207,6 +207,22 @@ namespace HotelListing.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "7cda1948-bd6a-4f58-beb2-d2324fdc53f4",
+                            ConcurrencyStamp = "a96a9d33-0626-46b8-842c-2331af144be2",
+                            Name = "User",
+                            NormalizedName = "USER"
+                        },
+                        new
+                        {
+                            Id = "59b18943-8f72-4205-a72a-b1287d34ea8f",
+                            ConcurrencyStamp = "1c0b219d-1762-4133-983f-4650fdf02064",
+                            Name = "Administrator",
+                            NormalizedName = "ADMINISTRATOR"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
